@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class ArticlesController < ApplicationController
 
     # 下記に現状の色んな情報が乗っている
     # http://localhost:3000/rails/info/routes
@@ -9,9 +9,8 @@ class HomeController < ApplicationController
         @article = Article.first
     end
 
-    def about
-        @title = 'ABOUT'
-        # 書かなくても表示させる
-        # render 'home/about'
-    end
+    # def about
+    # end
+
+    
 end
