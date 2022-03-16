@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     def index
         # ルールで書かなくても表示させるようになっている
         # render 'home/index'
-        @title = 'デイトラ'
+        @article = Article.first
     end
 
     def about
