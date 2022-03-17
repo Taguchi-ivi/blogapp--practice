@@ -6,7 +6,11 @@ class ArticlesController < ApplicationController
     def index
         # ルールで書かなくても表示させるようになっている
         # render 'home/index'
-        @article = Article.first
+        @articles = Article.all
+    end
+
+    def show
+        @article = Article.find(params[:id])
     end
 
     # def about
