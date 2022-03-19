@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
 
+    # オプションで指定したメソッドを処理する前にset_articleが実行される
+    before_action :set_article, only: [:show, :edit, :update]
+
     # 下記に現状の色んな情報が乗っている
     # http://localhost:3000/rails/info/routes
 
@@ -10,7 +13,6 @@ class ArticlesController < ApplicationController
     end
 
     def show
-        @article = Article.find(params[:id])
     end
 
     def new
@@ -28,11 +30,9 @@ class ArticlesController < ApplicationController
     end
 
     def edit
-        @article = Article.find(params[:id])
     end
 
     def update
-        @article = Article.find(params[:id])
         if @article.update(article_params)
             redirect_to article_path(@article), notice: '更新できました'
         else
@@ -57,6 +57,11 @@ class ArticlesController < ApplicationController
             # puts params
             # puts '---------------'
             params.require(:article).permit(:title, :content)
+        end
+
+        def set_article
+            # インスタンス変数でないと、他のメソッドからアクセスできない
+            @article = Article.find(params[:id])
         end
     
 end
