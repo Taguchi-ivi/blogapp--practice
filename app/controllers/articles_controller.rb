@@ -13,6 +13,8 @@ class ArticlesController < ApplicationController
     end
 
     def show
+        # 処理を中断させる
+        # binding.pry
     end
 
     def new
@@ -40,7 +42,7 @@ class ArticlesController < ApplicationController
             render :edit
         end
     end
-    
+
     def destroy
         article = Article.find(params[:id])
         # ↓処理が失敗すると止まる !
@@ -63,5 +65,5 @@ class ArticlesController < ApplicationController
             # インスタンス変数でないと、他のメソッドからアクセスできない
             @article = Article.find(params[:id])
         end
-    
+
 end
