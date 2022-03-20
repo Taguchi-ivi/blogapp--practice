@@ -16,14 +16,14 @@ class Article < ApplicationRecord
     validates :title, presence: true
     validates :title, length: { minimum: 2, maximum: 100 }
     validates :title, format: { with: /\A(?!\@)/ }
-    
+
     validates :content, presence: true
     validates :content, length: { minimum: 10}
     validates :content, uniqueness: true
 
     # 独自のバリデーション
     validate :validate_title_content_length
-    
+
     def display_created_at
         # binding.pry
         I18n.l(self.created_at, format: :default)
