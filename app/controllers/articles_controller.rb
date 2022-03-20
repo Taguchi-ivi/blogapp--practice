@@ -2,6 +2,8 @@ class ArticlesController < ApplicationController
 
     # オプションで指定したメソッドを処理する前にset_articleが実行される
     before_action :set_article, only: [:show, :edit, :update]
+    # deviseのメソッド[authenticate_user!] 
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
     # 下記に現状の色んな情報が乗っている
     # http://localhost:3000/rails/info/routes
