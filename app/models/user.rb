@@ -21,4 +21,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
+  
+        # userは記事をたくさんん持っている 複数形なのでarticles
+        # usesrがいなくなったら全て記事も削除 dependet destroy
+        has_many :articles, dependent: :destroy
+
+  def has_written?(article)
+    articles.exists?(id: article.id)
+  end
+
+  def display_name
+    self.email.split('@').first
+  end
 end
