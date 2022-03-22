@@ -3,10 +3,15 @@
 # Table name: articles
 #
 #  id         :integer          not null, primary key
-#  content    :text
-#  title      :string
+#  content    :text             not null
+#  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          not null
+#
+# Indexes
+#
+#  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
     # presence => 存在有無 ブランクだとエラー
@@ -24,9 +29,16 @@ class Article < ApplicationRecord
     # 独自のバリデーション
     validate :validate_title_content_length
 
+    # belongs_toは単数系でuser
+    belongs_to :user
+
     def display_created_at
         # binding.pry
         I18n.l(self.created_at, format: :default)
+    end
+
+    def author_name
+        user.display_name
     end
 
     private

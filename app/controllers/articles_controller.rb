@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 
     # オプションで指定したメソッドを処理する前にset_articleが実行される
-    before_action :set_article, only: [:show, :edit, :update]
+    before_action :set_article, only: [:show]
     # deviseのメソッド[authenticate_user!] 
     before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
@@ -20,11 +20,14 @@ class ArticlesController < ApplicationController
     end
 
     def new
-        @article = Article.new
+        # @article = Article.new
+        # userと紐付け、buildで空の箱を作成(全てnilの状態)
+        @article = current_user.articles.build
     end
 
     def create
-        @article = Article.new(article_params)
+        # @article = Article.new(article_params)
+        @article = current_user.articles.build(article_params)
         if @article.save
             redirect_to article_path(@article), notice: '保存できたよ'
         else
@@ -34,9 +37,12 @@ class ArticlesController < ApplicationController
     end
 
     def edit
+        # 他人にいじられてはいけないのでcurrent_user.articlesを設定する
+        @article = current_user.articles.find(params[:id])
     end
 
     def update
+        @article = current_user.articles.find(params[:id])
         if @article.update(article_params)
             redirect_to article_path(@article), notice: '更新できました'
         else
@@ -46,7 +52,8 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
-        article = Article.find(params[:id])
+        # article = Article.find(params[:id])
+        article = current_user.articles.find(params[:id])
         # ↓処理が失敗すると止まる !
         article.destroy!
         redirect_to root_path, notice: '削除に成功しました'
