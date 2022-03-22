@@ -17,6 +17,9 @@ class ArticlesController < ApplicationController
     def show
         # 処理を中断させる
         # binding.pry
+
+        # ↓set_articleによって@articleの値を取得できている状態
+        @comments = @article.comments
     end
 
     def new

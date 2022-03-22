@@ -31,6 +31,8 @@ class Article < ApplicationRecord
 
     # belongs_toは単数系でuser
     belongs_to :user
+    # 記事一つに対して複数のコメントなので、commentsと複数形に,記事が消えたらコメントも削除
+    has_many :comments, dependent: :destroy
 
     def display_created_at
         # binding.pry
