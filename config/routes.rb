@@ -13,4 +13,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:new, :create]
   end
 
+  # resourceにすることでprofileを複数形にしなくて良い.indexを作らなくて良くなる.複数ないとindexは作成できないから
+  resource :profile, only: [:show, :edit, :update]
+
 end
