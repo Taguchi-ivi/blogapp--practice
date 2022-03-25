@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  remember_created_at    :datetime
@@ -29,11 +29,21 @@ class User < ApplicationRecord
   # 一つなので複数形にしない
   has_one :profile, dependent: :destroy
 
+  # 複数存在するので複数形
+  has_many :likes, dependent: :destroy
+
+  # 中間TBLを経由して値を取得する=> through, favorite_articlesはarticleのことを言っている=>source
+  has_many :favorite_articles, through: :likes, source: :article
+
   # delegate allow_nil: trueによって、存在しなくてもエラーにならない
   delegate :birthday, :age, :gender, to: :profile, allow_nil: true
 
   def has_written?(article)
     articles.exists?(id: article.id)
+  end
+
+  def has_liked?(article)
+    likes.exists?(article_id: article.id)
   end
 
   def display_name
@@ -70,5 +80,6 @@ class User < ApplicationRecord
       'default-avatar.png'
     end
   end
+
 
 end

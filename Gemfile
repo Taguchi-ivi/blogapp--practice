@@ -5,9 +5,14 @@ ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
+
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
+
+# sqlite3 => posgreSQL
+gem 'pg', '>= 0.18', '< 2.0'
+
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
@@ -40,6 +45,10 @@ gem 'binding_of_caller'
 # ログイン機能実装
 gem 'devise'
 
+# AWS S3
+gem 'aws-sdk-s3', require: false
+
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -57,6 +66,10 @@ group :development, :test do
   # 確認は右記 => bundle exec rubocop
   # 全て修正は右記 => bundle exec rubocop -a
   gem 'rubocop-rails'
+
+  # dotenv
+  gem 'dotenv-rails'
+
 end
 
 group :development do

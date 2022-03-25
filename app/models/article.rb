@@ -2,18 +2,22 @@
 #
 # Table name: articles
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  content    :text             not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :integer          not null
+#  user_id    :bigint           not null
 #
 # Indexes
 #
 #  index_articles_on_user_id  (user_id)
 #
 class Article < ApplicationRecord
+
+    # 画像は記事につき一つなのでhas_one
+    has_one_attached :eyecatch
+
     # presence => 存在有無 ブランクだとエラー
     # length => 長さ, minimumは最低でも2文字ないとエラー, maximuumは100以下でないとエラー
     # uniqueness => 一意 同じものがないようにする場合はtrue, すでに存在する場合はエラー
@@ -34,6 +38,8 @@ class Article < ApplicationRecord
     # 記事一つに対して複数のコメントなので、commentsと複数形に,記事が消えたらコメントも削除
     has_many :comments, dependent: :destroy
 
+    has_many :likes, dependent: :destroy
+
     def display_created_at
         # binding.pry
         I18n.l(self.created_at, format: :default)
@@ -41,6 +47,10 @@ class Article < ApplicationRecord
 
     def author_name
         user.display_name
+    end
+
+    def like_count
+        likes.count
     end
 
     private
