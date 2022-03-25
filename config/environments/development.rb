@@ -29,7 +29,11 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
+  # 一時的にamazonに,動作確認用
+  # config.active_storage.service = :amazon
   config.active_storage.service = :local
+  # 一時的にamazonに
+  # config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
