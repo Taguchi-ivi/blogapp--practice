@@ -35,6 +35,15 @@ class User < ApplicationRecord
   # 中間TBLを経由して値を取得する=> through, favorite_articlesはarticleのことを言っている=>source
   has_many :favorite_articles, through: :likes, source: :article
 
+  # following => 自分が誰かにフォローしている, フォロ-したuserのidが入る
+  # follower  => 自分が誰かをフォローしていた場合、自分がfollowerになる, フォローしたcurrent_userのidが入る
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followings, through: :following_relationships, source: :following
+
+  has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followers, through: :follower_relationships, source: :follower
+
+
   # delegate allow_nil: trueによって、存在しなくてもエラーにならない
   delegate :birthday, :age, :gender, to: :profile, allow_nil: true
 
@@ -69,6 +78,26 @@ class User < ApplicationRecord
   #   profile&.gender
   # end
 
+  # 誰かをフォローする
+  def follow!(user)
+
+    user_id = get_user_id(user)
+    following_relationships.create!(following_id: user_id)
+  end
+
+  def unfollow!(user)
+
+    user_id = get_user_id(user)
+    relation = following_relationships.find_by!(following_id: user_id)
+    relation.destroy!
+  end
+
+  # フォローしているか確認する
+  # current_user.has_followed?(user.second)
+  def has_followed?(user)
+    following_relationships.exists?(following_id: user.id)
+  end
+  
   def prepare_profile
     profile || build_profile
   end
@@ -81,5 +110,15 @@ class User < ApplicationRecord
     end
   end
 
+  private
+
+    # Userクラスのインスタンスか判定して処理を分ける,paramsからの値はインスタンスではなく数字のみなので
+    def get_user_id(user)
+      if user.is_a?(User)
+        user.id
+      else
+        user
+      end
+    end
 
 end

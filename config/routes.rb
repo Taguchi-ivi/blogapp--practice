@@ -17,6 +17,11 @@ Rails.application.routes.draw do
     resource :like, only: [:create, :destroy]
   end
 
+  resources :accounts, only: [:show] do
+    resources :follows, only: [:create]
+    resources :unfollows, only: [:create]
+  end
+
   # resourceにすることでprofileを複数形にしなくて良い.indexを作らなくて良くなる.複数ないとindexは作成できないから
   resource :profile, only: [:show, :edit, :update]
 
