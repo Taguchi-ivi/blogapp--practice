@@ -51,6 +51,8 @@ gem 'devise'
 # AWS S3
 gem 'aws-sdk-s3', require: false
 
+# ActiveDecorator
+gem 'active_decorator'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'

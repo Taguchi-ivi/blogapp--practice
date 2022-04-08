@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # get '/about' => "articles#about"
   root to: 'articles#index'
 
+  resource :timeline, only: [:show]
+
   # resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
   # resources :articles
   # ↓ URL:articles/12/comments/1

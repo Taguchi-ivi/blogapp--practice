@@ -52,23 +52,9 @@ class User < ApplicationRecord
   end
 
   def has_liked?(article)
-    likes.exists?(article_id: article.id)
+      likes.exists?(article_id: article.id)
   end
-
-  def display_name
-    # self.email.split('@').first
-    # profileがnilだった場合エラーになる
-    # profile.nickname || self.email.split('@').first
-    # if profile && profile.nickname
-    #   profile.nickname
-    # else
-    #   self.email.split('@').first
-    # end
-    # ↓
-    # ぼっち演算子
-    profile&.nickname || self.email.split('@').first
-  end
-
+  
   # delegateによって birthday,genderメソッドが不要になる
   # def birthday
   #   profile&.birthday
@@ -100,14 +86,6 @@ class User < ApplicationRecord
   
   def prepare_profile
     profile || build_profile
-  end
-
-  def avatar_image
-    if profile&.avatar&.attached?
-      profile.avatar
-    else
-      'default-avatar.png'
-    end
   end
 
   private
