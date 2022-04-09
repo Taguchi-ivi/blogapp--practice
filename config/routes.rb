@@ -12,11 +12,11 @@ Rails.application.routes.draw do
   # resources :articles
   # ↓ URL:articles/12/comments/1
   resources :articles do
-    resources :comments, only: [:new, :create]
+    resources :comments, only: [:index, :new, :create]
 
     # 記事にとってlikeは一つだけ複数形のresourcesにすると削除する際にlikesのidを付与しないといけなくなる, likeのidを使うと他人のlikeを消すことも、確実に自分のだけにするならidを使わない方が良い
     # レコードを作る場合はcreate
-    resource :like, only: [:create, :destroy]
+    resource :like, only: [:show, :create, :destroy]
   end
 
   resources :accounts, only: [:show] do

@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
         # binding.pry
 
         # ↓set_articleによって@articleの値を取得できている状態
-        @comments = @article.comments
+        # @comments = @article.comments
     end
 
     def new

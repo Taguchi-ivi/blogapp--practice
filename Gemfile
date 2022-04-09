@@ -54,6 +54,10 @@ gem 'aws-sdk-s3', require: false
 # ActiveDecorator
 gem 'active_decorator'
 
+# Serializer
+# rails g serializer modelname
+gem 'active_model_serializers'
+
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 
