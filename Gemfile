@@ -58,6 +58,9 @@ gem 'active_decorator'
 # rails g serializer modelname
 gem 'active_model_serializers'
 
+# 非同期処理
+gem 'sidekiq'
+
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 
