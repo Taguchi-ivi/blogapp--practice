@@ -91,6 +91,11 @@ group :development do
 
   # Haml変換用
   gem 'erb2haml'
+
+  # Mailer 送信したメール内容を分かりやすく表示してくれる
+  gem 'letter_opener'
+  # Mailer 送信したメール内容をweb上で分かりやすく表示する
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :test do
