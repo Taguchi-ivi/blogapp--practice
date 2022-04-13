@@ -82,6 +82,12 @@ group :development, :test do
   # dotenv
   gem 'dotenv-rails'
 
+  # rspec
+  gem 'rspec-rails'
+
+  # factory_bot
+  gem 'factory_bot_rails'
+
 end
 
 group :development do
