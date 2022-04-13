@@ -1,9 +1,10 @@
-class CommentsController < ApplicationController
+class Api::CommentsController < Api::ApplicationController
 
-    def new
-        article = Article.find(params[:article_id])
-        @comment = article.comments.build
-    end
+    # jsonにより非同期処理を行うことになったので、不要になる
+    # def new
+    #     article = Article.find(params[:article_id])
+    #     @comment = article.comments.build
+    # end
 
     def index
         article = Article.find(params[:article_id])

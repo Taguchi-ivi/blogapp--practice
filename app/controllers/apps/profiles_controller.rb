@@ -1,11 +1,16 @@
-class ProfilesController < ApplicationController
+class Apps::ProfilesController < Apps::ApplicationController
 
     # ログインしていないと対応できないように!!
-    before_action :authenticate_user!, 
+    # apps::application_controllerに記載されている.それを継承しているので不要
+    # before_action :authenticate_user!
 
     def show
         @profile = current_user.profile
     end
+
+    # routesに記載したcollectionによりpublishアクションを追加
+    # def publish
+    # end
 
     def edit
         # 空欄だったらbuild,空欄ではない場合は値を渡す
