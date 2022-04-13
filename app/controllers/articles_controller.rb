@@ -14,6 +14,10 @@ class ArticlesController < ApplicationController
         @articles = Article.all
     end
 
+    # routesのmemberによりlikeアクションが使えるようになった
+    # def like
+    # end
+
     def show
         # 処理を中断させる
         # binding.pry

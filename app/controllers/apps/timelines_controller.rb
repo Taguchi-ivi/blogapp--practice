@@ -1,5 +1,6 @@
-class TimelinesController < ApplicationController
-    before_action :authenticate_user!
+class Apps::TimelinesController < Apps::ApplicationController
+    # Apps::application_controllerで指定しているため不要
+    # before_action :authenticate_user!
     
     def show
         # follow指定しているユーザーのIDのみ取得

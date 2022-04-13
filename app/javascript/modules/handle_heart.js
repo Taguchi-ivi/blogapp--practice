@@ -5,7 +5,8 @@ import axios from 'modules/axios'
 const ListenInactiveHeartEvent = (articleId) => {
     $('.inactive-heart').on('click', ()=> {
         // debugger
-        axios.post(`/articles/${articleId}/like`)
+        // axios.post(`/articles/${articleId}/like`)
+        axios.post(`/api/articles/${articleId}/like`)
         .then((response) => {
             // console.log(response)
             if (response.data.status === 'ok'){
@@ -23,7 +24,8 @@ const ListenInactiveHeartEvent = (articleId) => {
 const ListenActiveHeartEvent = (articleId) => {
     $('.active-heart').on('click', ()=> {
         // debugger
-        axios.delete(`/articles/${articleId}/like`)
+        // axios.delete(`/articles/${articleId}/like`)
+        axios.delete(`/api/articles/${articleId}/like`)
         .then((response) => {
             // console.log(response)
             if (response.data.status === 'ok'){
