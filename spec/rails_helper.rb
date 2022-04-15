@@ -66,4 +66,5 @@ RSpec.configure do |config|
 
   # テストでもdeviseを使用できるようにincludeする
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
 end
